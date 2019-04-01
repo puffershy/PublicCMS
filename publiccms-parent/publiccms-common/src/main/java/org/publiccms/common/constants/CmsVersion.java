@@ -1,15 +1,13 @@
 package org.publiccms.common.constants;
 
-import static org.publiccms.common.constants.CommonConstants.CMS_FILEPATH;
+import com.publiccms.common.base.Copyright;
 
 import java.util.UUID;
 
-import com.publiccms.common.base.Copyright;
+import static org.publiccms.common.constants.CommonConstants.CMS_FILEPATH;
 
 /**
- *
  * CmsVersion
- *
  */
 public class CmsVersion {
     private static final String clusterId = UUID.randomUUID().toString();
@@ -21,7 +19,7 @@ public class CmsVersion {
      * @return
      */
     public static final String getVersion() {
-        return "V2017.0708";
+        return "V1.0.0";
     }
 
     /**

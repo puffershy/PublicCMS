@@ -25,9 +25,7 @@ import com.publiccms.common.base.Base;
 import com.publiccms.common.proxy.UsernamePasswordAuthenticator;
 
 /**
- *
  * InstallationInitializer
- *
  */
 public class InitializationInitializer implements WebApplicationInitializer, Base {
     protected final Log log = getLog(getClass());
@@ -51,6 +49,8 @@ public class InitializationInitializer implements WebApplicationInitializer, Bas
                 Authenticator.setDefault(new UsernamePasswordAuthenticator(config.getProperty("cms.proxy.userName"),
                         config.getProperty("cms.proxy.password")));
             }
+
+            //判断模板目录下install.lock的版本号
             File file = new File(CMS_FILEPATH + INSTALL_LOCK_FILENAME);
             if (file.exists()) {
                 String version = readFileToString(file, DEFAULT_CHARSET);
@@ -82,7 +82,7 @@ public class InitializationInitializer implements WebApplicationInitializer, Bas
 
     /**
      * 检查CMS路径变量
-     * 
+     *
      * @param servletcontext
      * @param defaultPath
      * @throws ServletException
