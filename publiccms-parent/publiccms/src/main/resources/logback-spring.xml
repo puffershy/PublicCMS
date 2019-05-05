@@ -6,11 +6,11 @@
 	<springProperty scope="context" name="filename" source="puffer.log.filename" defaultValue="cms"/>
 	<springProfile name="dev,test">
 		<property name="logPattern"
-				  value="%date|%-5level|%.-20000000msg|%X{traceId}|%X{url} |%file %line|%logger %ex %n"></property>
+				  value="%date|%-5level|%.-20000000msg|%X{url} |%file %line|%logger %ex %n"></property>
 	</springProfile>
 	<springProfile name="prod">
 		<property name="logPattern"
-				  value="%date|%-5level|%.-20000000msg|%X{traceId}|%X{url} | %ex %n"></property>
+				  value="%date|%-5level|%.-20000000msg|%X{url} | %ex %n"></property>
 	</springProfile>
 
 	<!-- 输出日志到控制台 ConsoleAppender -->
