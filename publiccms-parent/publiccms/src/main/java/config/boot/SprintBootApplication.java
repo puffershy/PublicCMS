@@ -42,7 +42,7 @@ public class SprintBootApplication {
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
         TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
-        factory.setPort(Integer.valueOf(System.getProperty("cms.port", "9080")));
+        factory.setPort(Integer.valueOf(System.getProperty("cms.port", "80")));
         factory.setContextPath(System.getProperty("cms.contextPath", ""));
         factory.setDisplayName("PufferCMS");// 设置显示名称
         factory.setSessionTimeout(20, TimeUnit.MINUTES);// 设置session超时时间
