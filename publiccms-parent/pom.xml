@@ -124,11 +124,11 @@
             </dependency>
 
             <!-- mybatis -->
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${version.mybatis-spring-boot-starter}</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.mybatis.spring.boot</groupId>-->
+                <!--<artifactId>mybatis-spring-boot-starter</artifactId>-->
+                <!--<version>${version.mybatis-spring-boot-starter}</version>-->
+            <!--</dependency>-->
 
 
             <dependency>
