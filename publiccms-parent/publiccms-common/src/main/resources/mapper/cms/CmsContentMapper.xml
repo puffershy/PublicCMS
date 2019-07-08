@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.publiccms.logic.mapper.cms.CmsContentMapper">
+    <sql id="Base_Column_List">
+      id, site_id siteId, title, user_id userId, check_user_id checkUserId,category_id categoryId,
+      model_id modelId, parent_id parentId, copied, author, editor, only_url onlyUrl,
+      has_images hasImages,has_files hasFiles, has_static hasStatic, url,
+      description, tag_ids, cover, childs, scores, comments, clicks, publish_date, create_date,
+      sort, status, disabled
+    </sql>
+    <select id="query" resultType="org.publiccms.entities.cms.CmsContent">
+        select <include refid="Base_Column_List"/>
+        from cms_content where id = #{id}
+    </select>
+
+
+</mapper>
