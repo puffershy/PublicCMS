@@ -37,6 +37,8 @@
 		<version.quartz>2.3.0</version.quartz>
 		<!-- http://mvnrepository.com/artifact/com.mchange/c3p0 -->
 		<version.c3p0>0.9.5.2</version.c3p0>
+
+		<version.guava>27.1-jre</version.guava>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -244,7 +246,15 @@
 					<!--</exclusion>-->
 				<!--</exclusions>-->
 			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${version.guava}</version>
+			</dependency>
 		</dependencies>
+
+
 	</dependencyManagement>
 	<repositories>
 		<repository>
