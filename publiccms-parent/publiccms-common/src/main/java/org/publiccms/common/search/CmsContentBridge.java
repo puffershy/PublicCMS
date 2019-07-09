@@ -3,21 +3,22 @@ package org.publiccms.common.search;
 import org.apache.lucene.document.Document;
 import org.hibernate.search.bridge.FieldBridge;
 import org.hibernate.search.bridge.LuceneOptions;
+import org.publiccms.common.tools.ExtendUtils;
 import org.publiccms.entities.cms.CmsContent;
 import org.publiccms.entities.cms.CmsContentAttribute;
 import org.publiccms.logic.service.cms.CmsContentAttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 /**
- *
  * CmsContentBridge
- * 
  */
 @Component
 public class CmsContentBridge implements FieldBridge {
     /**
-     * 
+     *
      */
     public static CmsContentAttributeService contentAttributeService;
 
@@ -35,6 +36,11 @@ public class CmsContentBridge implements FieldBridge {
         CmsContentAttribute entity = contentAttributeService.getEntity(content.getId());
         if (null != entity) {
             content.setDescription(content.getDescription() + entity.getText());
+
+            Map<String, String> extendMap = ExtendUtils.getExtendMap(entity.getData());
+            for (String key : extendMap.keySet()) {
+                luceneOptions.addFieldToDocument(key, extendMap.get(key), document);
+            }
         }
     }
 }

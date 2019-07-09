@@ -1,12 +1,21 @@
 package org.publiccms.logic.service.cms;
 
 // Generated 2015-5-8 16:50:23 by com.publiccms.common.source.SourceGenerator
-import static com.publiccms.common.tools.CommonUtils.empty;
-import static com.publiccms.common.tools.CommonUtils.getDate;
-import static com.publiccms.common.tools.CommonUtils.notEmpty;
-import static org.apache.commons.lang3.ArrayUtils.add;
-import static org.apache.commons.lang3.StringUtils.splitByWholeSeparator;
 
+import com.publiccms.common.base.BaseService;
+import com.publiccms.common.handler.FacetPageHandler;
+import com.publiccms.common.handler.PageHandler;
+import org.publiccms.entities.cms.CmsCategory;
+import org.publiccms.entities.cms.CmsContent;
+import org.publiccms.logic.dao.cms.CmsCategoryDao;
+import org.publiccms.logic.dao.cms.CmsContentDao;
+import org.publiccms.logic.mapper.cms.CmsContentMapper;
+import org.publiccms.views.pojo.CmsContentStatistics;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,40 +23,40 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import org.publiccms.entities.cms.CmsCategory;
-import org.publiccms.entities.cms.CmsContent;
-import org.publiccms.logic.dao.cms.CmsCategoryDao;
-import org.publiccms.logic.dao.cms.CmsContentDao;
-import org.publiccms.views.pojo.CmsContentStatistics;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.publiccms.common.base.BaseService;
-import com.publiccms.common.handler.FacetPageHandler;
-import com.publiccms.common.handler.PageHandler;
+import static com.publiccms.common.tools.CommonUtils.empty;
+import static com.publiccms.common.tools.CommonUtils.getDate;
+import static com.publiccms.common.tools.CommonUtils.notEmpty;
+import static org.apache.commons.lang3.ArrayUtils.add;
+import static org.apache.commons.lang3.StringUtils.splitByWholeSeparator;
 
 /**
- *
  * CmsContentService
- * 
  */
 @Service
 @Transactional
 public class CmsContentService extends BaseService<CmsContent> {
 
     /**
-     * 
+     *
      */
     public static final int STATUS_DRAFT = 0;
     /**
-     * 
+     *
      */
     public static final int STATUS_NORMAL = 1;
     /**
-     * 
+     *
      */
     public static final int STATUS_PEND = 2;
+
+    @Autowired
+    private CmsContentDao dao;
+
+    @Autowired
+    private CmsCategoryDao categoryDao;
+
+    @Resource
+    private CmsContentMapper cmsContentMapper;
 
     /**
      * @param siteId
@@ -60,6 +69,27 @@ public class CmsContentService extends BaseService<CmsContent> {
     @Transactional(readOnly = true)
     public PageHandler query(Integer siteId, String text, String tagId, Integer pageIndex, Integer pageSize) {
         return dao.query(siteId, text, tagId, pageIndex, pageSize);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param siteId    网站主键
+     * @param city      城市
+     * @param position  职位类别
+     * @param industry  公司行业
+     * @param pageIndex 页码
+     * @param count     记录数
+     * @return com.publiccms.common.handler.PageHandler
+     * @author puffer
+     * @date 2019年07月09日 10:09:11
+     * @since 1.0.0
+     */
+    @Transactional(readOnly = true)
+    public PageHandler query(Integer siteId, String city, String position, String industry, Integer pageIndex, Integer count) {
+
+
+        return null;
     }
 
     /**
@@ -260,7 +290,7 @@ public class CmsContentService extends BaseService<CmsContent> {
                 if (0 < entity.getChilds()) {
                     for (CmsContent child : (List<CmsContent>) getPage(siteId, null, null, null, null, false, null,
                             entity.getId(), null, null, null, null, null, null, null, null, null, null, null, null, null)
-                                    .getList()) {
+                            .getList()) {
                         child.setDisabled(true);
                         entityList.add(child);
                     }
@@ -303,7 +333,7 @@ public class CmsContentService extends BaseService<CmsContent> {
                 if (0 < entity.getChilds()) {
                     for (CmsContent child : (List<CmsContent>) getPage(siteId, null, null, null, null, false, null,
                             entity.getId(), null, null, null, null, null, null, null, null, null, null, null, null, null)
-                                    .getList()) {
+                            .getList()) {
                         child.setDisabled(false);
                         entityList.add(child);
                     }
@@ -328,7 +358,7 @@ public class CmsContentService extends BaseService<CmsContent> {
                 if (0 < entity.getChilds()) {
                     for (CmsContent child : (List<CmsContent>) getPage(siteId, null, null, null, null, false, null,
                             entity.getId(), null, null, null, null, null, null, null, null, null, null, null, null, null)
-                                    .getList()) {
+                            .getList()) {
                         delete(child.getId());
                     }
                 }
@@ -338,8 +368,4 @@ public class CmsContentService extends BaseService<CmsContent> {
         return entityList;
     }
 
-    @Autowired
-    private CmsContentDao dao;
-    @Autowired
-    private CmsCategoryDao categoryDao;
 }
